@@ -1,0 +1,22 @@
+spring :
+  application :
+    name : smart-research-assistant
+  ai:
+    google:
+      genai:
+        api-key : AIzaSyCIPstn2sKLLoAp-JTOcNydK3Eu_bkhINk
+        chat:
+          options:
+            model : models/gemini-flash-latest
+
+server :
+  port : 8080
+
+
+###for manual ai api integration
+# gemini :
+#   api :
+#     url : https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=
+#     key : ${GEMINI_KEY}
+
+

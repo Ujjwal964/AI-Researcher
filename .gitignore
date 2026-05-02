@@ -1,0 +1,12 @@
+.env
+# Build output
+target/
+# Logs & compiled files
+*.class
+*.log
+# MacOS
+.DS_Store
+# IDE
+.vscode/
+.idea/
+*.iml
