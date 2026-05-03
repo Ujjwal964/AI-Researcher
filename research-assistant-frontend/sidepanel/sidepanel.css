@@ -4,13 +4,35 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #f5f7fb;
   color: #333;
   padding: 10px;
   height: 100vh;
   overflow: hidden;
+} */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f7fb;
+  background-image: url("../images/background.jpg");
+  background-size: 180px;
+  background-repeat: repeat;
+  color: #333;
+  padding: 10px;
+  height: 100vh;
+  overflow: hidden;
+  position: relative; 
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 247, 251, 0.78); 
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
@@ -18,6 +40,8 @@ body {
   flex-direction: column;
   gap: 8px;
   height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .header {
