@@ -4,38 +4,46 @@ import org.springframework.stereotype.Service;
 import com.research.assistant.model.ResearchRequest;
 
 @Service
-public class ResearchServiceImpl implements ResearchService{
+public class ResearchServiceImpl implements ResearchService {
     private final ChatClient chatClient;
 
-    public ResearchServiceImpl(ChatClient.Builder builder){
+    public ResearchServiceImpl(ChatClient.Builder builder) {
         this.chatClient = builder.build();
     }
 
     @Override
-    public String processContent(ResearchRequest researchRequest){
+    public String processContent(ResearchRequest researchRequest) {
         String systemPrompt = buildPrompt(researchRequest);
 
-        String AIResponse = chatClient.
-                            prompt()
-                            .system(systemPrompt)
-                            .user(researchRequest.getContent())
-                            .call()
-                            .content();
-        
-        return AIResponse;
+        String AIResponse = chatClient.prompt()
+                .system(systemPrompt)
+                .user(researchRequest.getContent())
+                .call()
+                .content();
 
+        return AIResponse;
     }
 
-    //HELPER METHOD
-    static String buildPrompt(ResearchRequest researchRequest){
+
+    // HELPER METHOD
+    static String buildPrompt(ResearchRequest researchRequest) {
         StringBuilder prompt = new StringBuilder();
 
-        switch(researchRequest.getOperation()){
-            case "summarize" -> prompt.append("Provide a clear and concise summary of the following text in a few sentences : \n\n");
+        switch (researchRequest.getOperation()) {
+            // case "summarize" -> prompt.append("Provide a clear and concise summary of the following text in a few sentences : \n\n");
+            case "summarize" -> prompt.append("""
+                    Provide a research-oriented summary of the following text.
+                    Structure the output clearly with:
+                    - Key Idea (1-2 lines)
+                    - Main Points (use numbered points: 1, 2, 3...)
+                    - Important Facts / Data (if any)
+                    - Implications or Insights (why it matters)
+                    Keep it concise, clear, and useful for quick understanding. Text: \n\n """);
+
             case "suggest" -> prompt.append("Based on the following content : suggest related topics and further reading.Format the response with clear headings and bullet points : \n\n");
             default -> throw new IllegalArgumentException("Undefined Operation : " + researchRequest.getOperation());
         }
-       
+
         return prompt.toString();
     }
 }
@@ -43,73 +51,65 @@ public class ResearchServiceImpl implements ResearchService{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // MANUAL AI API INTEGRATION
 // @Service
 // public class ResearchService {
-//     @Value("&{gemini.api.url}")
-//     private String geminiUrl;
-//     @Value("&{gemini.api.key}")
-//     private String geminiApi;
+// @Value("&{gemini.api.url}")
+// private String geminiUrl;
+// @Value("&{gemini.api.key}")
+// private String geminiApi;
 
-//     private final WebClient webClient;
+// private final WebClient webClient;
 
-//     public ResearchService(WebClient.Builder builder){
-//         this.webClient = builder.build();
-//     }
+// public ResearchService(WebClient.Builder builder){
+// this.webClient = builder.build();
+// }
 
-//     public String processContent(ResearchRequest researchRequest){
-//         //build prompt
-//         String prompt = buildPrompt(researchRequest);
+// public String processContent(ResearchRequest researchRequest){
+// //build prompt
+// String prompt = buildPrompt(researchRequest);
 
-//         //query ai api model
-//         //input structure for gemini is : contents[] object -> parts[] object -> text : prompt(string).
-//         Map<String , Object> requestBody = Map.of(
-//             "contents" , new Object[] {
-//                 Map.of("parts" , new Object[]{
-//                     Map.of("text" , prompt)
-//                 })
-//             }
-//         );
-//         System.out.println(requestBody);
+// //query ai api model
+// //input structure for gemini is : contents[] object -> parts[] object -> text
+// : prompt(string).
+// Map<String , Object> requestBody = Map.of(
+// "contents" , new Object[] {
+// Map.of("parts" , new Object[]{
+// Map.of("text" , prompt)
+// })
+// }
+// );
+// System.out.println(requestBody);
 
-//         String response = webClient.post()
-//                 .uri(geminiUrl+geminiApi)
-//                 .bodyValue(requestBody)
-//                 .retrieve()
-//                 .bodyToMono(String.class)
-//                 .block();
+// String response = webClient.post()
+// .uri(geminiUrl+geminiApi)
+// .bodyValue(requestBody)
+// .retrieve()
+// .bodyToMono(String.class)
+// .block();
 
+// //parse response
+// //return response
+// //make method which use same exact way of output return the way gemini gives
+// and return that response here.
+// return "";
+// }
 
-//         //parse response
-//         //return response
-//         //make method which use same exact way of output return the way gemini gives and return that response here.
-//         return ""; 
-//     }
+// static String buildPrompt(ResearchRequest researchRequest){
+// StringBuilder prompt = new StringBuilder();
 
-//     static String buildPrompt(ResearchRequest researchRequest){
-//         StringBuilder prompt = new StringBuilder();
+// switch(researchRequest.getOperation()){
+// case "summarize" -> prompt.append("Provide a clear and concise summary of the
+// following text in a few sentences : \n\n");
+// case "suggest" -> prompt.append("Based on the following content : suggest
+// related topics and further reading.Format the response with clear headings
+// and bullet points : \n\n");
+// default -> throw new IllegalArgumentException("Unknown Operation" +
+// researchRequest.getOperation());
+// }
 
-//         switch(researchRequest.getOperation()){
-//             case "summarize" -> prompt.append("Provide a clear and concise summary of the following text in a few sentences : \n\n");
-//             case "suggest" -> prompt.append("Based on the following content : suggest related topics and further reading.Format the response with clear headings and bullet points : \n\n");
-//             default -> throw new IllegalArgumentException("Unknown Operation" + researchRequest.getOperation());
-//         }
-
-//         prompt.append(researchRequest.getContent());
-//         return prompt.toString();
-//     }
+// prompt.append(researchRequest.getContent());
+// return prompt.toString();
+// }
 
 // }
