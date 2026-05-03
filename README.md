@@ -77,7 +77,8 @@ This project introduces a browser-integrated AI assistant that:
 ### 🔹 Frontend (Chrome Extension)
 - HTML  
 - CSS  
-- JavaScript  
+- JavaScript
+- Manifest
 - Chrome Extension APIs  
 
 ### 🔹 Tools & Practices
@@ -90,6 +91,7 @@ This project introduces a browser-integrated AI assistant that:
 
 ## 📂 Project Structure
 
+```bash
 SMART-RESEARCH-ASSISTANT/
 │
 ├── research-assistant-backend/
@@ -117,6 +119,7 @@ SMART-RESEARCH-ASSISTANT/
 │   └── manifest.json
 │
 └── README.md
+```
 
 ---
 
