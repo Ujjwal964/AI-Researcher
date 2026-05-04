@@ -8,25 +8,27 @@
   <body>
     <div class="container">
 
-      <div class="header">
-        <h2>Research Assistant</h2>
+      <div class="main-content">
+
+        <div class="header"><h2>Research Assistant</h2></div>
+
+        <div class="helperLine"><p><span>Highlight text &rarr; Explore Suggestions or Summarize !</span></p></div>
+
+        <div class="actions">
+          <button id="suggest">Suggest</button> &nbsp;
+          <button id="summarize">Summarize</button>
+        </div>
+
+        <div class="notes">
+          <h3>Research Notes</h3>
+          <button id="copyNotes" class="copy-btn"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect> <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path> </svg>Copy</button>
+          <textarea name="notes" id="notes" placeholder="Take notes here..."></textarea>
+          <button id="save">Save Notes</button>
+        </div>
+
+        <div id="results" data-placeholder="Your AI results will appear here..."></div>
+
       </div>
-
-      <div class="helperLine"> <p><span>Highlight text &rarr; Explore Suggestions or Summarize !</span></p> </div>
-
-      <div class="actions">
-        <button id="suggest">Suggest</button> &nbsp;
-        <button id="summarize">Summarize</button>
-      </div>
-
-      <div class="notes">
-        <h3>Research Notes</h3>
-        <button id="copyNotes" class="copy-btn"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"> <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect> <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path> </svg>Copy</button>
-        <textarea name="notes" id="notes" placeholder="Take notes here..."></textarea>
-        <button id="save">Save Notes</button>
-      </div>
-
-      <div id="results" data-placeholder="Your AI results will appear here..."></div>
 
       <div class="footer"> <a href="https://github.com/Ujjwal964" target="_blank">By Ujjwal Bansal</a> </div>
 
@@ -34,5 +36,4 @@
 
     <script src="sidepanel.js"></script>
   </body>
-
 </html>
