@@ -10,7 +10,7 @@ spring :
             model : ${GEMINI_MODEL}
 
 server :
-  port : 8080
+  port : ${PORT:8080}
 
 
 ###for manual ai api integration
