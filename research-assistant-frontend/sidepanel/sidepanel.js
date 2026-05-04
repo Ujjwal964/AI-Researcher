@@ -30,6 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //HELPER METHODS
+
+// const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://ai-researcher-uev1.onrender.com";
+
 async function summarizeText() {
     try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true }); //get current active tab.(CHROME DEFAULT BUILT IN COMMAND)
@@ -45,7 +49,7 @@ async function summarizeText() {
 
         showLoadingState();
         console.log("User Selected Text : " + result);
-        const response = await fetch("http://localhost:8080/research/content", {
+        const response = await fetch(`${BASE_URL}/research/content`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ content: result, operation: "summarize" })
@@ -78,7 +82,7 @@ async function suggestText() {
 
         showLoadingState();
         console.log("User selected text : " + result);
-        const response = await fetch("http://localhost:8080/research/content", {
+        const response = await fetch(`${BASE_URL}/research/content`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ content: result, operation: "suggest" })
